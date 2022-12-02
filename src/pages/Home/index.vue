@@ -30,6 +30,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('home/getFloorList');
+        this.$bus.$emit('clearKey');
     },
     computed: {
         ...mapState('home',['floorList'])

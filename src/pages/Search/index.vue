@@ -1,151 +1,109 @@
 <template>
-    <div>
-        <NavType />
-        <div class="main">
-            <div class="py-container">
-                <!--bread-->
-                <div class="bread">
-                    <ul class="fl sui-breadcrumb">
-                        <li>
-                            <a href="javascript:;">全部结果</a>
-                        </li>
-                    </ul>
-                    <ul class="fl sui-tag">
-                        <li class="with-x" v-show="searchParams.categoryName">
-                            {{ searchParams.categoryName
+<div>
+    <NavType />
+    <div class="main">
+        <div class="py-container">
+            <!--bread-->
+            <div class="bread">
+                <ul class="fl sui-breadcrumb">
+                    <li>
+                        <a href="javascript:;">全部结果</a>
+                    </li>
+                </ul>
+                <ul class="fl sui-tag">
+                    <li class="with-x" v-show="searchParams.categoryName">
+                        {{ searchParams.categoryName
                             }}<i @click="removeCategoryName">×</i>
-                        </li>
-                        <li class="with-x" v-show="searchParams.keyword">
-                            {{ searchParams.keyword
+                    </li>
+                    <li class="with-x" v-show="searchParams.keyword">
+                        {{ searchParams.keyword
                             }}<i @click="removeKeyword">×</i>
-                        </li>
-                        <li class="with-x" v-show="searchParams.trademark">
-                            {{ searchParams.trademark.split(":")[1]
+                    </li>
+                    <li class="with-x" v-show="searchParams.trademark">
+                        {{ searchParams.trademark.split(":")[1]
                             }}<i @click="removeTrademark">×</i>
-                        </li>
-                        <li
-                            class="with-x"
-                            v-show="searchParams.props"
-                            v-for="(attr, index) of searchParams.props"
-                            :key="attr.attrId"
-                        >
-                            {{ attr.split(":")[1]
+                    </li>
+                    <li class="with-x" v-show="searchParams.props" v-for="(attr, index) of searchParams.props" :key="attr.attrId">
+                        {{ attr.split(":")[1]
                             }}<i @click="removeProps(index)">×</i>
-                        </li>
-                    </ul>
-                </div>
+                    </li>
+                </ul>
+            </div>
 
-                <!--selector-->
-                <SearchSelector @handleProps="handleProps" />
+            <!--selector-->
+            <SearchSelector @handleProps="handleProps" />
 
-                <!--details-->
-                <div class="details clearfix">
-                    <div class="sui-navbar">
-                        <div class="navbar-inner filter">
-                            <ul class="sui-nav">
-                                <li :class="{ active: isOne }">
-                                    <a @click="changeOrder(1)"
-                                        >综合
-                                        <span class="iconfont" v-show="oneAsc"
-                                            >&#xe7eb;</span
-                                        >
-                                        <span class="iconfont" v-show="oneDesc"
-                                            >&#xe7ec;</span
-                                        ></a
-                                    >
-                                </li>
-                                <li :class="{ active: isTwo }">
-                                    <a @click="changeOrder(2)"
-                                        >销量
-                                        <span class="iconfont" v-show="twoAsc"
-                                            >&#xe7eb;</span
-                                        >
-                                        <span class="iconfont" v-show="twoDesc"
-                                            >&#xe7ec;</span
-                                        ></a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="#">新品</a>
-                                </li>
-                                <li>
-                                    <a href="#">评价</a>
-                                </li>
-                                <li>
-                                    <a href="#">价格⬆</a>
-                                </li>
-                                <li>
-                                    <a href="#">价格⬇</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="goods-list">
-                        <ul class="yui3-g">
-                            <li
-                                class="yui3-u-1-5"
-                                v-for="(good, index) of goodsList"
-                                :key="good.id"
-                            >
-                                <div class="list-wrap">
-                                    <div class="p-img">
-                                        <router-link :to="`/detail/${good.id}`"
-                                            ><img v-lazy="good.defaultImg"
-                                        /></router-link>
-                                    </div>
-                                    <div class="price">
-                                        <strong>
-                                            <em>¥</em>
-                                            <i> {{ good.price.toFixed(2) }}</i>
-                                        </strong>
-                                    </div>
-                                    <div class="attr">
-                                        <a
-                                            href="item.html"
-                                            :title="good.title"
-                                            >{{ good.title }}</a
-                                        >
-                                    </div>
-                                    <div class="commit">
-                                        <i class="command"
-                                            >已有<span>2000</span>人评价</i
-                                        >
-                                    </div>
-                                    <div class="operate">
-                                        <a
-                                            href="success-cart.html"
-                                            target="_blank"
-                                            class="
-                                                sui-btn
-                                                btn-bordered btn-danger
-                                            "
-                                            >加入购物车</a
-                                        >
-                                        <a
-                                            href="javascript:void(0);"
-                                            class="sui-btn btn-bordered"
-                                            >收藏</a
-                                        >
-                                    </div>
-                                </div>
+            <!--details-->
+            <div class="details clearfix">
+                <div class="sui-navbar">
+                    <div class="navbar-inner filter">
+                        <ul class="sui-nav">
+                            <li :class="{ active: isOne }">
+                                <a @click="changeOrder(1)">综合
+                                    <span class="iconfont" v-show="oneAsc">&#xe7eb;</span>
+                                    <span class="iconfont" v-show="oneDesc">&#xe7ec;</span></a>
+                            </li>
+                            <li :class="{ active: isTwo }">
+                                <a @click="changeOrder(2)">销量
+                                    <span class="iconfont" v-show="twoAsc">&#xe7eb;</span>
+                                    <span class="iconfont" v-show="twoDesc">&#xe7ec;</span></a>
+                            </li>
+                            <li>
+                                <a href="#">新品</a>
+                            </li>
+                            <li>
+                                <a href="#">评价</a>
+                            </li>
+                            <li>
+                                <a href="#">价格⬆</a>
+                            </li>
+                            <li>
+                                <a href="#">价格⬇</a>
                             </li>
                         </ul>
                     </div>
-                    <Pagination
-                        :pageNo="searchParams.pageNo"
-                        :pageSize="searchParams.pageSize"
-                        :continues="5"
-                        :total="total"
-                        @changePage="changePage"
-                    ></Pagination>
                 </div>
+                <div class="goods-list">
+                    <ul class="yui3-g">
+                        <li class="yui3-u-1-5" v-for="(good, index) of goodsList" :key="good.id">
+                            <div class="list-wrap">
+                                <div class="p-img">
+                                    <router-link :to="`/detail/${good.id}`"><img v-lazy="good.defaultImg" /></router-link>
+                                </div>
+                                <div class="price">
+                                    <strong>
+                                        <em>¥</em>
+                                        <i> {{ good.price.toFixed(2) }}</i>
+                                    </strong>
+                                </div>
+                                <div class="attr">
+                                    <a href="item.html" :title="good.title">{{ good.title }}</a>
+                                </div>
+                                <div class="commit">
+                                    <i class="command">已有<span>2000</span>人评价</i>
+                                </div>
+                                <div class="operate">
+                                    <a href="success-cart.html" target="_blank" class="
+                                                sui-btn
+                                                btn-bordered btn-danger
+                                            ">加入购物车</a>
+                                    <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <Pagination :pageNo="searchParams.pageNo" :pageSize="searchParams.pageSize" :continues="5" :total="total" @changePage="changePage"></Pagination>
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {
+    mapGetters
+} from "vuex";
 import SearchSelector from "./SearchSelector/SearchSelector";
 export default {
     name: "Search",

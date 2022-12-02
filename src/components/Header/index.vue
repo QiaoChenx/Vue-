@@ -1,16 +1,15 @@
 <template>
     <div class="header">
-        <!-- 头部的第一行 -->
         <div class="top">
             <div class="container">
                 <div class="loginList">
                     <p>尚品汇欢迎您！</p>
                     <p v-if="$store.state.login.userInfo.name">
-                        <a>{{$store.state.login.userInfo.name}}</a>
-                        <a @click="logout">退出登录</a>
+                        <a>{{ $store.state.login.userInfo.name }}</a>
+                        <a @click="logout"> 退出登录</a>
                     </p>
                     <p v-else>
-                        <span>请</span>
+                        <span>请 </span>
                         <router-link to="/login">登录</router-link>
                         <router-link to="/register" class="register"
                             >免费注册</router-link
@@ -29,7 +28,6 @@
                 </div>
             </div>
         </div>
-        <!--头部第二行 搜索区域-->
         <div class="bottom">
             <h1 class="logoArea">
                 <router-link class="logo" title="尚品汇" to="/home">
@@ -77,11 +75,11 @@ export default {
             this.$router.push(location);
         },
         async logout() {
-            let result =  await this.$store.dispatch('login/logout');
-            if(result.code == 200) {
+            try {
+                await this.$store.dispatch('login/logout');
                 this.$router.push('/home');
-            } else {
-                alert(result.data)
+            } catch (error) {
+                alert(result.data);
             }
         }
     },

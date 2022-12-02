@@ -19,10 +19,12 @@ export default [
         component: () => import('@/pages/PaySuccess'),
         meta: { show: true },
         beforeEnter: (to, from, next) => {
-            if (from.path != '/pay') {
-                next(false);
-            } else {
+            if (from.path == '/pay') {
                 next();
+            } else if (from.path == '/login') {
+                next('/home');
+            } else {
+                next(false);
             }
         }
     },
@@ -32,10 +34,12 @@ export default [
         component: () => import('@/pages/Pay'),
         meta: { show: true },
         beforeEnter: (to, from, next) => {
-            if (from.path!='/trade') {
-                next(false);
-            } else {
+            if (from.path == '/trade') {
                 next();
+            } else if (from.path == '/login') {
+                next('/home');
+            } else {
+                next(false);
             }
         }
     },
@@ -45,10 +49,12 @@ export default [
         component: () => import('@/pages/Trade'),
         meta: { show: true },
         beforeEnter: (to, from, next) => {
-            if (from.path != '/shopcart') {
-                next(false);
-            } else {
+            if (from.path == '/shopcart') {
                 next();
+            } else if (from.path == '/login') {
+                next('/home');
+            } else {
+                next(false);
             }
         }
     },

@@ -57,6 +57,10 @@ route.beforeEach(async function (to, from, next) {
             next();
         }
     }
+
+    if (from.path == '/search') {
+        Vue.$bus.$emit('clearKey');
+    }
 })
 
 export default route;

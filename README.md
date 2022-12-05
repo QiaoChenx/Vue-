@@ -1,3 +1,10 @@
+# shangpinhuishop
+## Build Setup
+
+```bash
+# 克隆项目
+git clone https://github.com/wearetheone777/shangpinhuishop.git
+
 # 进入项目目录
 cd shangpinhuishop
 
@@ -307,7 +314,7 @@ f.只有从支付界面, 才能跳转到支付成功的界面
 ## 图片懒加载
 
 还没有加载得到目标图片时, 先显示loading图片
-在<img>进入可视范围才加载请求目标图片
+在进入可视范围才加载请求目标图片
 
 ## 路由懒加载
 
